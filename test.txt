@@ -1,0 +1,15 @@
+::in MSVC  x64 Native Tools Command Prompt 
+set TCL_INC="C:\Tcl\include"
+set TCL_LIB="C:\Tcl\lib\tclstub86.lib"
+cl /LD /EHsc /O2 /I%TCL_INC% /DUSE_TCL_STUBS testlib.cpp /link %TCL_LIB% /OUT:testlib.dll
+
+::in tcl
+load mathlib.dll MultiSort
+set randomlist [math::randomList 10]
+
+set x_coords {10.0 5.0 10.0 5.0 5 5 5}
+set y_coords {2.0  3.0 1.0  2.0 2 2 3}
+set ids      {101  102 103  104 1222 1 7}
+
+set result [math::multiSort $x_coords $y_coords $ids]
+foreach row $result {puts "Sorted Row: $row"}
