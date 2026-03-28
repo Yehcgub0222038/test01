@@ -13,3 +13,20 @@ set ids      {101  102 103  104 1222 1 7}
 
 set result [math::multiSort $x_coords $y_coords $ids]
 foreach row $result {puts "Sorted Row: $row"}
+
+load ./combined_ext.dll CombinedExt
+
+# --- MultiSort 範例 (混合 1D 與 2D) ---
+set matrix {{10.0 2.0} {5.0 3.0} {10.0 1.0}}
+set ids {999 888 777}
+# 結果會依據 matrix 的第一、二欄排序，並帶上 ids
+puts "Sorted: [math::multiSort $matrix $ids]"
+
+# --- MergeList 範例 (ID 重複展開) ---
+set data {{101 1.0} {102 3.0} {101 5.0}}
+# 檢查前 1 欄 (ID)，重複則接龍
+puts "Merged: [math::mergeList $data 1]" 
+# 預期: {101.0 1.0 5.0} {102.0 3.0}
+
+# --- RandomList 範例 ---
+puts "Random: [math::randomList 5]"
